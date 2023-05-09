@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Custom Elements内にReactを使ったサンプル
+
+![React Version Badge](https://img.shields.io/badge/React-18.2.0-blue.svg)
+
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
