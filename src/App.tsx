@@ -22,7 +22,9 @@ function App({ value, onCountChanged }: Props) {
     <>
       <section>
         <h1>React Custom Elements</h1>
-        <p>Custom Elements 内</p>
+        <ul>
+          <li>Custom Elements 内</li>
+        </ul>
         <dl>
           <dt>Value:</dt>
           <dd>[ <strong>{value}</strong> ]</dd>
