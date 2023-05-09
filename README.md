@@ -2,7 +2,14 @@
 
 ![React Version Badge](https://img.shields.io/badge/React-18.2.0-blue.svg)
 
+## 概要
+
+- Webコンポーネントの属性値を内部のReactにPropsとし渡す
+- React内からCustom Elements外へイベントを送る
+
+
 ---
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
