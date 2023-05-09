@@ -24,8 +24,8 @@ function App({ value, onCountChanged }: Props) {
         <h1>React Custom Elements</h1>
         <p>Custom Elements 内</p>
         <dl>
-          <dt>Value</dt>
-          <dd>{value}</dd>
+          <dt>Value:</dt>
+          <dd>[ <strong>{value}</strong> ]</dd>
         </dl>
         <p>
           <b>{count}</b>: <button type="button" onClick={handleClick}>カウントアップ</button>
