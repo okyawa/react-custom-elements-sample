@@ -20,6 +20,14 @@ class ReactCounter extends HTMLElement {
     if (this.shadowRoot === null) {
       return;
     }
+
+    // 外部CSSファイルを読み込み
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "global.css";
+    this.shadowRoot.appendChild(link);
+
+    // Web Components の属性値を取得し、Reactコンポーネントをマウント
     const value = this.getAttribute('value') || '';
     ReactDOM.render(
       <App value={value} onCountChanged={this.handleCountChanged} />,
@@ -29,6 +37,7 @@ class ReactCounter extends HTMLElement {
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (name === 'value' && oldValue !== newValue) {
+      // 更新された Web Components の属性値をReactコンポーネントに反映
       ReactDOM.render(
         <App value={newValue} onCountChanged={this.handleCountChanged} />,
         this.shadowRoot
@@ -43,6 +52,9 @@ class ReactCounter extends HTMLElement {
     ReactDOM.unmountComponentAtNode(this.shadowRoot);
   }
 
+  /**
+   * Reactコンポーネントからカスタムイベントを実行するために渡すcallback関数
+   */
   private handleCountChanged = (count: number) => {
     const event = new CustomEvent('count-changed', {
       detail: count,
