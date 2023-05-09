@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+import { createRoot, Root } from 'react-dom/client';
 
 import './index.css';
 import App from './App';
@@ -8,9 +9,12 @@ import reportWebVitals from './reportWebVitals';
  * Reactを使ったサンプルのCustom Elements
  */
 class ReactCounter extends HTMLElement {
+  private root: Root | null;
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this.root = null;
   }
 
   /**
@@ -26,9 +30,9 @@ class ReactCounter extends HTMLElement {
 
     // Web Components の属性値を取得し、Reactコンポーネントをマウント
     const value = this.getAttribute('value') || '';
-    ReactDOM.render(
-      <App value={value} onCountChanged={this.handleCountChanged} />,
-      this.shadowRoot
+    this.root = createRoot(this.shadowRoot);
+    this.root.render(
+      <App value={value} onCountChanged={this.handleCountChanged} />
     );
   }
 
@@ -45,11 +49,13 @@ class ReactCounter extends HTMLElement {
    * observedAttributesで列挙したいずれかの属性が変更されたときに呼ばれる
    */
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (this.root === null) {
+      return;
+    }
     if (name === 'value' && oldValue !== newValue) {
       // 更新された Web Components の属性値をReactコンポーネントに反映
-      ReactDOM.render(
-        <App value={newValue} onCountChanged={this.handleCountChanged} />,
-        this.shadowRoot
+      this.root.render(
+        <App value={newValue} onCountChanged={this.handleCountChanged} />
       );
     }
   }
