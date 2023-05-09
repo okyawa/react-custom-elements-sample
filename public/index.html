@@ -27,8 +27,25 @@
     <title>React Custom Elements App</title>
   </head>
   <body>
+    <div style="max-width: 360px; margin: 0 auto;">
 
-    <react-app value="default"></react-app>
+      <div style="margin: 32px 0; padding: 8px 32px; border: 1px solid #ccc;">
+        <react-app value="default"></react-app>
+      </div>
 
+      <h2>Custom Element外</h2>
+      <input type="text" id="input" value="default" />
+
+      <script>
+        const inputElement = document.querySelector('input[type="text"]');
+        inputElement.addEventListener('input', (event) => {
+          const value = event.target.value;
+          const reactApp = document.querySelector('react-app');
+          reactApp.setAttribute('value', value);
+        });
+
+      </script>
+
+    </div>
   </body>
 </html>

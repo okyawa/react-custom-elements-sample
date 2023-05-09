@@ -7,11 +7,14 @@ type Props = {
 function App({ value }: Props) {
   return (
     <>
-      <h1>React Custom Elements</h1>
-      <dl>
-        <dt>Value</dt>
-        <dd>{value}</dd>
-      </dl>
+      <section>
+        <h1>React Custom Elements</h1>
+        <p>Custom Elements 内</p>
+        <dl>
+          <dt>Value</dt>
+          <dd>{value}</dd>
+        </dl>
+      </section>
     </>
   )
 }
