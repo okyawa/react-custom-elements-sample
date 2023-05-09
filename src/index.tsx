@@ -4,18 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+/**
+ * Reactを使ったサンプルのCustom Elements
+ */
 class ReactCounter extends HTMLElement {
-  static get observedAttributes() {
-    return [
-      'value',
-    ];
-  }
-
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
   }
 
+  /**
+   * 要素がdocumentに追加された際に実行される
+   */
   connectedCallback() {
     if (this.shadowRoot === null) {
       return;
@@ -32,6 +32,18 @@ class ReactCounter extends HTMLElement {
     );
   }
 
+  /**
+   * 変更を監視する属性名の配列を指定
+   */
+  static get observedAttributes() {
+    return [
+      'value',
+    ];
+  }
+
+  /**
+   * observedAttributesで列挙したいずれかの属性が変更されたときに呼ばれる
+   */
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (name === 'value' && oldValue !== newValue) {
       // 更新された Web Components の属性値をReactコンポーネントに反映
@@ -42,6 +54,9 @@ class ReactCounter extends HTMLElement {
     }
   }
 
+  /**
+   * 要素がdocumentから削除された際に実行される
+   */
   disconnectedCallback() {
     if (this.shadowRoot === null) {
       return;
@@ -73,6 +88,9 @@ class ReactCounter extends HTMLElement {
   };
 }
 
+/**
+ * Custom Elementsの登録
+ */
 customElements.define("react-app", ReactCounter);
 
 // If you want to start measuring performance in your app, pass a function
