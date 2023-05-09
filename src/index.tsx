@@ -22,10 +22,7 @@ class ReactCounter extends HTMLElement {
     }
 
     // 外部CSSファイルを読み込み
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "global.css";
-    this.shadowRoot.appendChild(link);
+    this.appendCSSFile('global.css')
 
     // Web Components の属性値を取得し、Reactコンポーネントをマウント
     const value = this.getAttribute('value') || '';
@@ -50,6 +47,19 @@ class ReactCounter extends HTMLElement {
       return;
     }
     ReactDOM.unmountComponentAtNode(this.shadowRoot);
+  }
+
+  /**
+   * 外部CSSファイルを読み込み
+   */
+  private appendCSSFile(filePath: string) {
+    if (this.shadowRoot === null) {
+      return
+    }
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = filePath;
+    this.shadowRoot.appendChild(link);
   }
 
   /**
