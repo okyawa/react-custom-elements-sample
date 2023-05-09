@@ -21,12 +21,18 @@ class ReactCounter extends HTMLElement {
       return;
     }
     const value = this.getAttribute('value') || '';
-    ReactDOM.render(<App value={value} />, this.shadowRoot);
+    ReactDOM.render(
+      <App value={value} onCountChanged={this.handleCountChanged} />,
+      this.shadowRoot
+    );
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (name === "value" && oldValue !== newValue) {
-      ReactDOM.render(<App value={newValue} />, this.shadowRoot);
+    if (name === 'value' && oldValue !== newValue) {
+      ReactDOM.render(
+        <App value={newValue} onCountChanged={this.handleCountChanged} />,
+        this.shadowRoot
+      );
     }
   }
 
@@ -36,6 +42,13 @@ class ReactCounter extends HTMLElement {
     }
     ReactDOM.unmountComponentAtNode(this.shadowRoot);
   }
+
+  private handleCountChanged = (count: number) => {
+    const event = new CustomEvent('count-changed', {
+      detail: count,
+    });
+    this.dispatchEvent(event);
+  };
 }
 
 customElements.define("react-app", ReactCounter);

@@ -33,19 +33,33 @@
         <react-app value="default"></react-app>
       </div>
 
-      <h2>Custom Element外</h2>
-      <input type="text" id="input" value="default" />
+      <section>
+        <h2>Custom Element外</h2>
+        <div>
+          <input type="text" id="input" value="default" />
+        </div>
+        <p>
+          カウントの値: <span id="count">0</span>
+        </p>
 
-      <script>
-        const inputElement = document.querySelector('input[type="text"]');
-        inputElement.addEventListener('input', (event) => {
-          const value = event.target.value;
-          const reactApp = document.querySelector('react-app');
-          reactApp.setAttribute('value', value);
-        });
-
-      </script>
+      </section>
 
     </div>
+
+    <script>
+      const inputElement = document.querySelector('input[type="text"]');
+      const reactApp = document.querySelector('react-app');
+      inputElement.addEventListener('input', (event) => {
+        const value = event.target.value;
+        reactApp.setAttribute('value', value);
+      });
+      reactApp.addEventListener('count-changed', (event) => {
+        // カスタムイベントからデータを取得
+        const count = event.detail;
+        const countElement = document.getElementById('count');
+        countElement.textContent = count;
+      });
+    </script>
+
   </body>
 </html>
