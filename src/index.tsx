@@ -4,8 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-
 class ReactCounter extends HTMLElement {
+  static get observedAttributes() {
+    return [
+      'value',
+    ];
+  }
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -15,7 +20,14 @@ class ReactCounter extends HTMLElement {
     if (this.shadowRoot === null) {
       return;
     }
-    ReactDOM.render(<App />, this.shadowRoot);
+    const value = this.getAttribute('value') || '';
+    ReactDOM.render(<App value={value} />, this.shadowRoot);
+  }
+
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (name === "value" && oldValue !== newValue) {
+      ReactDOM.render(<App value={newValue} />, this.shadowRoot);
+    }
   }
 
   disconnectedCallback() {
