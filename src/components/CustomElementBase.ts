@@ -23,9 +23,6 @@ export class CustomElementBase extends HTMLElement {
 
   constructor() {
     super();
-    if (this.shadowRootEnabled) {
-      this.attachShadow({ mode: 'open' });
-    }
     this.root = null;
   }
 
@@ -33,8 +30,8 @@ export class CustomElementBase extends HTMLElement {
    * 要素がdocumentに追加された際に実行される
    */
   connectedCallback() {
-    if (this.shadowRootEnabled && this.shadowRoot === null) {
-      return;
+    if (this.shadowRootEnabled) {
+      this.attachShadow({ mode: 'open' });
     }
 
     // Web Components の属性値を取得し、Reactコンポーネントをマウント
@@ -43,6 +40,7 @@ export class CustomElementBase extends HTMLElement {
     } else {
       this.root = createRoot(this);
     }
+
     this.render();
   }
 

@@ -9,7 +9,7 @@ export class ExtendedReactShadowCounter extends CustomElementBase {
   protected customEventName = 'sampleEvent';
 
   /** Shadow Rootを使うかどうか */
-  // protected shadowRootEnabled = true;
+  protected shadowRootEnabled = true;
 
   connectedCallback() {
     super.connectedCallback();
