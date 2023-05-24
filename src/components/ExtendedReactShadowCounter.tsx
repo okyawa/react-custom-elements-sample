@@ -23,13 +23,6 @@ export class ExtendedReactShadowCounter extends CustomElementShadowBase {
   }
 
   /**
-   * 変更を監視する属性名の配列値を取得
-   */
-  protected get observedAttributeValues(): string[] {
-    return ExtendedReactShadowCounter.observedAttributes;
-  }
-
-  /**
    * Reactコンポーネントを描画
    */
   protected render() {

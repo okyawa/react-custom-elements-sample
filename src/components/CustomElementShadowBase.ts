@@ -44,25 +44,17 @@ export class CustomElementShadowBase extends HTMLElement {
   }
 
   /**
-   * 変更を監視する属性名の配列値を取得
-   *
-   * ※継承先でも再定義し、CustomElementShadowBaseのクラス名部分を継承先のクラス名に変更する
-   */
-  protected get observedAttributeValues(): string[] {
-    return CustomElementShadowBase.observedAttributes;
-  }
-
-  /**
    * observedAttributesで列挙したいずれかの属性が変更されたときに呼ばれる
    */
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (this.root === null) {
       return;
     }
-    if (this.needRendering(name, oldValue, newValue)) {
-      // 更新された Web Components の属性値をReactコンポーネントに反映
-      this.render();
+    if (oldValue === newValue) {
+      return;
     }
+    // 更新された Web Components の属性値をReactコンポーネントに反映
+    this.render();
   }
 
   /**
@@ -84,13 +76,6 @@ export class CustomElementShadowBase extends HTMLElement {
    * this.root.render(<Sample />);
    */
   protected render() { }
-
-  /**
-   * Reactコンポーネントの再描画が必要かどうか
-   */
-  protected needRendering(name: string, oldValue: string, newValue: string): boolean {
-    return this.observedAttributeValues.includes(name) && oldValue !== newValue;
-  }
 
   /**
    * 外部CSSファイルを読み込み
