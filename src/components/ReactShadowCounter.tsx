@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom";
 import { createRoot, Root } from 'react-dom/client';
 
-// import './ReactShadowCounter.css';
 import CountUp from './CountUp';
 
 /**
