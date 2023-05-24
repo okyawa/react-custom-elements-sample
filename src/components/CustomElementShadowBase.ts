@@ -44,6 +44,15 @@ export class CustomElementShadowBase extends HTMLElement {
   }
 
   /**
+   * 変更を監視する属性名の配列値を取得
+   *
+   * ※継承先でも再定義し、CustomElementShadowBaseのクラス名部分を継承先のクラス名に変更する
+   */
+  protected get observedAttributeValues(): string[] {
+    return CustomElementShadowBase.observedAttributes;
+  }
+
+  /**
    * observedAttributesで列挙したいずれかの属性が変更されたときに呼ばれる
    */
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -78,14 +87,9 @@ export class CustomElementShadowBase extends HTMLElement {
 
   /**
    * Reactコンポーネントの再描画が必要かどうか
-   *
-   * ※継承先でも再定義し、CustomElementShadowBaseのクラス名部分を継承先のクラス名に変更する
    */
   protected needRendering(name: string, oldValue: string, newValue: string): boolean {
-    const isTargetAttribute = CustomElementShadowBase
-      .observedAttributes
-      .includes(name);
-    return isTargetAttribute && oldValue !== newValue;
+    return this.observedAttributeValues.includes(name) && oldValue !== newValue;
   }
 
   /**

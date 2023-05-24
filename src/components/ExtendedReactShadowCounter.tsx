@@ -23,6 +23,13 @@ export class ExtendedReactShadowCounter extends CustomElementShadowBase {
   }
 
   /**
+   * 変更を監視する属性名の配列値を取得
+   */
+  protected get observedAttributeValues(): string[] {
+    return ExtendedReactShadowCounter.observedAttributes;
+  }
+
+  /**
    * Reactコンポーネントを描画
    */
   protected render() {
@@ -44,14 +51,4 @@ export class ExtendedReactShadowCounter extends CustomElementShadowBase {
     });
     this.dispatchEvent(event);
   };
-
-  /**
-   * Reactコンポーネントの再描画が必要かどうか
-   */
-  protected needRendering(name: string, oldValue: string, newValue: string): boolean {
-    const isTargetAttribute = ExtendedReactShadowCounter
-      .observedAttributes
-      .includes(name);
-    return isTargetAttribute && oldValue !== newValue;
-  }
 }
