@@ -44,4 +44,14 @@ export class ExtendedReactShadowCounter extends CustomElementShadowBase {
     });
     this.dispatchEvent(event);
   };
+
+  /**
+   * Reactコンポーネントの再描画が必要かどうか
+   */
+  protected needRendering(name: string, oldValue: string, newValue: string): boolean {
+    const isTargetAttribute = ExtendedReactShadowCounter
+      .observedAttributes
+      .includes(name);
+    return isTargetAttribute && oldValue !== newValue;
+  }
 }

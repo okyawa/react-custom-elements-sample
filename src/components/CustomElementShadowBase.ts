@@ -78,9 +78,14 @@ export class CustomElementShadowBase extends HTMLElement {
 
   /**
    * Reactコンポーネントの再描画が必要かどうか
+   *
+   * ※継承先でも再定義し、CustomElementShadowBaseのクラス名部分を継承先のクラス名に変更する
    */
   protected needRendering(name: string, oldValue: string, newValue: string): boolean {
-    return CustomElementShadowBase.observedAttributes.includes(name) && oldValue !== newValue;
+    const isTargetAttribute = CustomElementShadowBase
+      .observedAttributes
+      .includes(name);
+    return isTargetAttribute && oldValue !== newValue;
   }
 
   /**
