@@ -1,7 +1,7 @@
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 import { createRoot, Root } from 'react-dom/client';
 
-import './ReactCounter.css';
+// import './ReactCounter.css';
 import CountUp from './CountUp';
 
 /**
@@ -12,7 +12,6 @@ export class ReactCounter extends HTMLElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
     this.root = null;
   }
 
@@ -20,16 +19,12 @@ export class ReactCounter extends HTMLElement {
    * 要素がdocumentに追加された際に実行される
    */
   connectedCallback() {
-    if (this.shadowRoot === null) {
-      return;
-    }
-
     // 外部CSSファイルを読み込み
     this.appendCSSFile('global.css')
 
     // Web Components の属性値を取得し、Reactコンポーネントをマウント
     const value = this.getAttribute('value') || '';
-    this.root = createRoot(this.shadowRoot);
+    this.root = createRoot(this);
     this.root.render(
       <CountUp value={value} onCountChanged={this.handleCountChanged} />
     );
@@ -63,23 +58,20 @@ export class ReactCounter extends HTMLElement {
    * 要素がdocumentから削除された際に実行される
    */
   disconnectedCallback() {
-    if (this.shadowRoot === null) {
+    if (this.root === null) {
       return;
     }
-    ReactDOM.unmountComponentAtNode(this.shadowRoot);
+    ReactDOM.unmountComponentAtNode(this);
   }
 
   /**
    * 外部CSSファイルを読み込み
    */
   private appendCSSFile(filePath: string) {
-    if (this.shadowRoot === null) {
-      return
-    }
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = filePath;
-    this.shadowRoot.appendChild(link);
+    this.appendChild(link);
   }
 
   /**
