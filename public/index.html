@@ -40,7 +40,7 @@
         <div class="outer_box">
           <h3>Custom Element外</h3>
           <div>
-            <input type="text" id="input" value="default" />
+            <input type="text" id="input" value="default01" />
           </div>
           <p>
             カウントの値: <strong class="count">0</strong>
@@ -57,7 +57,7 @@
         <div class="outer_box">
           <h3>Custom Element外</h3>
           <div>
-            <input type="text" id="input" value="default" />
+            <input type="text" id="input" value="default02" />
           </div>
           <p>
             カウントの値: <strong class="count">0</strong>
@@ -65,6 +65,21 @@
         </div>
       </section>
 
+      <hr />
+
+      <section>
+        <h2>共通部分を継承<br />Shadow Rootを使った場合</h2>
+        <extended-react-shadow-counter value="default03"></extended-react-shadow-counter>
+        <div class="outer_box">
+          <h3>Custom Element外</h3>
+          <div>
+            <input type="text" id="input" value="default03" />
+          </div>
+          <p>
+            カウントの値: <strong class="count">0</strong>
+          </p>
+        </div>
+      </section>
 
     </main>
 
@@ -84,18 +99,36 @@
           countElement.textContent = count;
         });
       }
-      // react-shadow-counter のCustom Elementsの初期化
+
+      /**
+       * Custom Elements外のinput要素を取得
+       */
+      function findOuterInputElement(element) {
+        return element
+          .closest('section')
+          .querySelector('input[type="text"]');
+      }
+
+      /**
+       * react-shadow-counter のCustom Elementsの初期化
+       */
       const reactShadowCounterElement = document.querySelector('react-shadow-counter');
-      const inputElement01 = reactShadowCounterElement
-        .closest('section')
-        .querySelector('input[type="text"]');
+      const inputElement01 = findOuterInputElement(reactShadowCounterElement);
       setupCustomElement(reactShadowCounterElement, inputElement01)
-      // react-counter のCustom Elementsの初期化
+
+      /**
+       * react-counter のCustom Elementsの初期化
+       */
       const reactCounterElement = document.querySelector('react-counter');
-      const inputElement02 = reactCounterElement
-        .closest('section')
-        .querySelector('input[type="text"]');
+      const inputElement02 = findOuterInputElement(reactCounterElement);
       setupCustomElement(reactCounterElement, inputElement02)
+
+      /**
+       * extended-react-shadow-counter のCustom Elementsの初期化
+       */
+      const extendedReactShadowCounterElement = document.querySelector('extended-react-shadow-counter');
+      const inputElement03 = findOuterInputElement(extendedReactShadowCounterElement);
+      setupCustomElement(extendedReactShadowCounterElement, inputElement03)
     </script>
 
   </body>
