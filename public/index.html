@@ -29,22 +29,28 @@
   </head>
   <body>
     <h1>Reactを使ったCustom Elementsサンプル</h1>
-    <main style="max-width: 360px; margin: 0 auto;">
 
-      <react-shadow-counter value="default"></react-shadow-counter>
+    <main>
 
-      <section style="padding: 0 32px;">
-        <h2>Custom Element外</h2>
-        <div>
-          <input type="text" id="input" value="default" />
+      <hr />
+
+      <section>
+        <h2>Shadow Rootを使った場合</h2>
+        <react-shadow-counter value="default"></react-shadow-counter>
+        <div class="outer_box">
+          <h3>Custom Element外</h3>
+          <div>
+            <input type="text" id="input" value="default" />
+          </div>
+          <p>
+            カウントの値: <strong id="count">0</strong>
+          </p>
         </div>
-        <p>
-          カウントの値: <strong id="count">0</strong>
-        </p>
-
       </section>
 
-    </>
+
+
+    </main>
 
     <script>
       /**
