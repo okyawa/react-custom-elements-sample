@@ -57,7 +57,7 @@ export class CustomElementBase extends HTMLElement {
   /**
    * observedAttributesで列挙したいずれかの属性が変更されたときに呼ばれる
    */
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(_: string, oldValue: string, newValue: string) {
     if (this.root === null) {
       return;
     }
