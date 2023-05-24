@@ -18,9 +18,6 @@ export class ReactCounter extends HTMLElement {
    * 要素がdocumentに追加された際に実行される
    */
   connectedCallback() {
-    // 外部CSSファイルを読み込み
-    this.appendCSSFile('global.css')
-
     // Web Components の属性値を取得し、Reactコンポーネントをマウント
     const value = this.getAttribute('value') || '';
     this.root = createRoot(this);
@@ -61,16 +58,6 @@ export class ReactCounter extends HTMLElement {
       return;
     }
     ReactDOM.unmountComponentAtNode(this);
-  }
-
-  /**
-   * 外部CSSファイルを読み込み
-   */
-  private appendCSSFile(filePath: string) {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = filePath;
-    this.appendChild(link);
   }
 
   /**
