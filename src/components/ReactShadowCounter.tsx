@@ -50,12 +50,13 @@ export class ReactShadowCounter extends HTMLElement {
     if (this.root === null) {
       return;
     }
-    if (ReactShadowCounter.observedAttributes.includes(name) && oldValue !== newValue) {
-      // 更新された Web Components の属性値をReactコンポーネントに反映
-      this.root.render(
-        <CountUp value={newValue} onCountChanged={this.handleCountChanged} />,
-      );
+    if (oldValue === newValue) {
+      return;
     }
+    // 更新された Web Components の属性値をReactコンポーネントに反映
+    this.root.render(
+      <CountUp value={newValue} onCountChanged={this.handleCountChanged} />,
+    );
   }
 
   /**
