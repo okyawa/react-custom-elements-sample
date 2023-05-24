@@ -1,3 +1,4 @@
+import { ExtendedReactShadowCounter } from './components/ExtendedReactShadowCounter';
 import { ReactCounter } from './components/ReactCounter';
 import { ReactShadowCounter } from './components/ReactShadowCounter';
 
@@ -6,3 +7,4 @@ import { ReactShadowCounter } from './components/ReactShadowCounter';
  */
 customElements.define('react-shadow-counter', ReactShadowCounter);
 customElements.define('react-counter', ReactCounter);
+customElements.define('extended-react-shadow-counter', ExtendedReactShadowCounter);
