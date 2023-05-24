@@ -29,7 +29,7 @@
   <body style="background-color: #f5f5f5; color: #222;">
     <div style="max-width: 360px; margin: 0 auto;">
 
-      <react-app value="default"></react-app>
+      <react-shadow-counter value="default"></react-shadow-counter>
 
       <section style="padding: 0 32px;">
         <h2>Custom Element外</h2>
@@ -45,18 +45,25 @@
     </div>
 
     <script>
-      const inputElement = document.querySelector('input[type="text"]');
-      const reactApp = document.querySelector('react-app');
-      inputElement.addEventListener('input', (event) => {
-        const value = event.target.value;
-        reactApp.setAttribute('value', value);
-      });
-      reactApp.addEventListener('count-changed', (event) => {
-        // カスタムイベントからデータを取得
-        const count = event.detail;
-        const countElement = document.getElementById('count');
-        countElement.textContent = count;
-      });
+      /**
+       * Custom Elements内とのやりとりを初期化
+       */
+      function setupCustomElement(element, inputElement) {
+        inputElement.addEventListener('input', (event) => {
+          const value = event.target.value;
+          element.setAttribute('value', value);
+        });
+        element.addEventListener('count-changed', (event) => {
+          // カスタムイベントからデータを取得
+          const count = event.detail;
+          const countElement = document.getElementById('count');
+          countElement.textContent = count;
+        });
+      }
+      // react-shadow-counter のCustom Elementsの初期化
+      const inputElement01 = document.querySelector('input[type="text"]');
+      const reactShadowCounterElement = document.querySelector('react-shadow-counter');
+      setupCustomElement(reactShadowCounterElement, inputElement01)
     </script>
 
   </body>

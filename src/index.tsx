@@ -4,7 +4,7 @@ import reportWebVitals from './reportWebVitals';
 /**
  * Custom Elementsの登録
  */
-customElements.define('react-app', ReactShadowCounter);
+customElements.define('react-shadow-counter', ReactShadowCounter);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
