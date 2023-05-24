@@ -36,7 +36,7 @@
 
       <section>
         <h2>Shadow Rootを使った場合</h2>
-        <react-shadow-counter value="default"></react-shadow-counter>
+        <react-shadow-counter value="default01"></react-shadow-counter>
         <div class="outer_box">
           <h3>Custom Element外</h3>
           <div>
@@ -48,6 +48,21 @@
         </div>
       </section>
 
+      <hr />
+
+      <section>
+        <h2>Shadow Rootを使わない場合</h2>
+        <react-counter value="default02"></react-counter>
+        <div class="outer_box">
+          <h3>Custom Element外</h3>
+          <div>
+            <input type="text" id="input" value="default" />
+          </div>
+          <p>
+            カウントの値: <strong id="count">0</strong>
+          </p>
+        </div>
+      </section>
 
 
     </main>
@@ -69,9 +84,17 @@
         });
       }
       // react-shadow-counter のCustom Elementsの初期化
-      const inputElement01 = document.querySelector('input[type="text"]');
       const reactShadowCounterElement = document.querySelector('react-shadow-counter');
+      const inputElement01 = reactShadowCounterElement
+        .closest('section')
+        .querySelector('input[type="text"]');
       setupCustomElement(reactShadowCounterElement, inputElement01)
+      // react-counter のCustom Elementsの初期化
+      const reactCounterElement = document.querySelector('react-counter');
+      const inputElement02 = reactShadowCounterElement
+        .closest('section')
+        .querySelector('input[type="text"]');
+      setupCustomElement(reactShadowCounterElement, inputElement02)
     </script>
 
   </body>
