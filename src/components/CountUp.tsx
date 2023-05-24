@@ -15,7 +15,7 @@ function CountUp({ value, onCountChanged }: Props) {
   }, [count, onCountChanged]);
 
   const handleClick = () => {
-    setCount(count + 1);
+    setCount((oldValue) => oldValue + 1);
   };
 
   return (
