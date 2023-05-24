@@ -11,10 +11,6 @@ export class ExtendedReactCounter extends CustomElementBase {
   /** Shadow Rootを使うかどうか */
   protected shadowRootEnabled = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-  }
-
   /**
    * 変更を監視する属性名の配列を指定
    */
