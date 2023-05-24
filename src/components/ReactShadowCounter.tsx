@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 import { createRoot, Root } from 'react-dom/client';
 
 import CountUp from './CountUp';
@@ -11,7 +11,7 @@ export class ReactShadowCounter extends HTMLElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: 'open' });
     this.root = null;
   }
 
@@ -24,13 +24,13 @@ export class ReactShadowCounter extends HTMLElement {
     }
 
     // 外部CSSファイルを読み込み
-    this.appendCSSFile('global.css')
+    this.appendCSSFile('global.css');
 
     // Web Components の属性値を取得し、Reactコンポーネントをマウント
     const value = this.getAttribute('value') || '';
     this.root = createRoot(this.shadowRoot);
     this.root.render(
-      <CountUp value={value} onCountChanged={this.handleCountChanged} />
+      <CountUp value={value} onCountChanged={this.handleCountChanged} />,
     );
   }
 
@@ -53,7 +53,7 @@ export class ReactShadowCounter extends HTMLElement {
     if (ReactShadowCounter.observedAttributes.includes(name) && oldValue !== newValue) {
       // 更新された Web Components の属性値をReactコンポーネントに反映
       this.root.render(
-        <CountUp value={newValue} onCountChanged={this.handleCountChanged} />
+        <CountUp value={newValue} onCountChanged={this.handleCountChanged} />,
       );
     }
   }
@@ -73,7 +73,7 @@ export class ReactShadowCounter extends HTMLElement {
    */
   private appendCSSFile(filePath: string) {
     if (this.shadowRoot === null) {
-      return
+      return;
     }
     const link = document.createElement('link');
     link.rel = 'stylesheet';

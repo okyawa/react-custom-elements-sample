@@ -16,7 +16,7 @@ function CountUp({ value, onCountChanged }: Props) {
 
   const handleClick = () => {
     setCount(count + 1);
-  }
+  };
 
   return (
     <>
@@ -34,7 +34,7 @@ function CountUp({ value, onCountChanged }: Props) {
         </p>
       </section>
     </>
-  )
+  );
 }
 
 export default CountUp;

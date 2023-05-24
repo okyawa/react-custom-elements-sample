@@ -22,7 +22,7 @@ export class ReactCounter extends HTMLElement {
     const value = this.getAttribute('value') || '';
     this.root = createRoot(this);
     this.root.render(
-      <CountUp value={value} onCountChanged={this.handleCountChanged} />
+      <CountUp value={value} onCountChanged={this.handleCountChanged} />,
     );
   }
 
@@ -45,7 +45,7 @@ export class ReactCounter extends HTMLElement {
     if (ReactCounter.observedAttributes.includes(name) && oldValue !== newValue) {
       // 更新された Web Components の属性値をReactコンポーネントに反映
       this.root.render(
-        <CountUp value={newValue} onCountChanged={this.handleCountChanged} />
+        <CountUp value={newValue} onCountChanged={this.handleCountChanged} />,
       );
     }
   }
