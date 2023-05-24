@@ -1,12 +1,15 @@
 import CountUp from './CountUp';
-import { CustomElementShadowBase } from './CustomElementShadowBase';
+import { CustomElementBase } from './CustomElementBase';
 
 /**
  * Reactを使ったサンプルのCustom Elements (Shadow Rootを使用)
  */
-export class ExtendedReactShadowCounter extends CustomElementShadowBase {
+export class ExtendedReactShadowCounter extends CustomElementBase {
   /** Reactコンポーネントからカスタムイベントを実行する際のカスタムイベント名 */
   protected customEventName = 'sampleEvent';
+
+  /** Shadow Rootを使うかどうか */
+  // protected shadowRootEnabled = true;
 
   connectedCallback() {
     super.connectedCallback();

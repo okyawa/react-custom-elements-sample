@@ -2,9 +2,9 @@ import ReactDOM from 'react-dom';
 import { createRoot, Root } from 'react-dom/client';
 
 /**
- * Reactを使ったCustom Elementsのベースクラス (Shadow Rootを使用)
+ * Reactを使ったCustom Elementsのベースクラス
  */
-export class CustomElementShadowBase extends HTMLElement {
+export class CustomElementBase extends HTMLElement {
   /**
    * Reactコンポーネントからカスタムイベントを実行する際のカスタムイベント名
    *
@@ -12,11 +12,20 @@ export class CustomElementShadowBase extends HTMLElement {
    */
   protected customEventName = 'customElementEvent';
 
+  /**
+   * Shadow Rootを使うかどうか
+   *
+   * ※継承先で実装
+   */
+  protected shadowRootEnabled = true;
+
   protected root: Root | null;
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    if (this.shadowRootEnabled) {
+      this.attachShadow({ mode: 'open' });
+    }
     this.root = null;
   }
 
@@ -24,12 +33,16 @@ export class CustomElementShadowBase extends HTMLElement {
    * 要素がdocumentに追加された際に実行される
    */
   connectedCallback() {
-    if (this.shadowRoot === null) {
+    if (this.shadowRootEnabled && this.shadowRoot === null) {
       return;
     }
 
     // Web Components の属性値を取得し、Reactコンポーネントをマウント
-    this.root = createRoot(this.shadowRoot);
+    if (this.shadowRootEnabled && this.shadowRoot !== null) {
+      this.root = createRoot(this.shadowRoot);
+    } else {
+      this.root = createRoot(this);
+    }
     this.render();
   }
 
@@ -61,6 +74,10 @@ export class CustomElementShadowBase extends HTMLElement {
    * 要素がdocumentから削除された際に実行される
    */
   disconnectedCallback() {
+    if (!this.shadowRootEnabled) {
+      ReactDOM.unmountComponentAtNode(this);
+      return;
+    }
     if (this.shadowRoot === null) {
       return;
     }
@@ -81,6 +98,11 @@ export class CustomElementShadowBase extends HTMLElement {
    * 外部CSSファイルを読み込み
    */
   protected appendCSSFile(filePath: string) {
+    if (!this.shadowRootEnabled) {
+      // Shadow Rootを使わない場合、
+      // 外部CSSを読み込んでもCustom Elements内にスコープを限定できないため、読み込まない
+      return;
+    }
     if (this.shadowRoot === null) {
       return;
     }
