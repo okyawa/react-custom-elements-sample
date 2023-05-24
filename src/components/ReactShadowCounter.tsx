@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom";
 import { createRoot, Root } from 'react-dom/client';
 
-import './ReactCounter.css';
+// import './ReactShadowCounter.css';
 import CountUp from './CountUp';
 
 /**
- * Reactを使ったサンプルのCustom Elements
+ * Reactを使ったサンプルのCustom Elements (Shadow Rootを使用)
  */
 export class ReactShadowCounter extends HTMLElement {
   private root: Root | null;
