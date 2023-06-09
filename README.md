@@ -1,6 +1,7 @@
 # Custom Elements内にReactを使ったサンプル
 
 ![React Version Badge](https://img.shields.io/badge/React-18.2.0-blue.svg)
+![Node.js Version Badge](https://img.shields.io/badge/Node.js-18.14.0-green.svg)
 
 ## 概要
 
